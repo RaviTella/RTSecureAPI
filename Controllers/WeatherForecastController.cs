@@ -44,7 +44,7 @@ namespace RTSecureAPI.Controllers
 
 
         [HttpGet]
-        [Authorize(Policy = "rtgroup2")]
+        [Authorize(Policy = "both")]
         [Route("get2")]
         public IEnumerable<WeatherForecast> Get2()
         {

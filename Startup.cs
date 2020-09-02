@@ -36,14 +36,17 @@ namespace RTSecureAPI
                 builder =>
                 {
                     // Not a permanent solution, but just trying to isolate the problem
-                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                    //builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                    builder.WithOrigins("http://localhost:8080").AllowAnyMethod().AllowAnyHeader();
                 });
             });
 
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("rtgroup1", policy => policy.RequireRole("7ecca800-fdf2-4c6f-bbc2-394902d2d50d"));
-                options.AddPolicy("rtgroup2", policy => policy.RequireRole("f39c8767-1fee-4758-845c-643614bad1d0", ""));
+                options.AddPolicy("rtgroup2", policy => policy.RequireRole("f39c8767-1fee-4758-845c-643614bad1d0"));
+                options.AddPolicy("both", policy =>
+                  policy.RequireRole("7ecca800-fdf2-4c6f-bbc2-394902d2d50d", "f39c8767-1fee-4758-845c-643614bad1d0"));
             });
 
             services.AddControllers();
